@@ -1,0 +1,138 @@
+<style>
+
+body
+{
+    background: linear-gradient(to right, #25c481, #25b7c4);
+    font-family: 'Inter', sans-serif;
+}
+
+.site-content-header
+{
+    background-color: transparent !important;
+    font-weight: bold;
+}
+
+.page
+{
+    background-color: transparent !important;
+}
+
+table
+{
+    width:80%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+td
+{
+    border: 2px solid #045D5D !important;
+    background: white;
+}
+
+th
+{
+    background-color: rgba(255,255,255,0.3) !important;
+    border: 2px solid #045D5D !important;
+}
+
+h1
+{
+    color: white;
+    text-align: center !important;
+    padding-top:10px;
+    font-weight: 700;
+}
+
+h3
+{
+    color: white;
+    text-align: center;
+    padding-top:50px;
+}
+
+.formulario
+{
+    max-width: 400px;
+    padding: 25px;
+    margin: 10px auto;
+    background: #F7F7F7;
+    margin-top:45px;
+    border-radius: 20px;
+}
+
+.inseridoComSucesso
+{
+    max-width: 450px !important;
+}
+
+label
+{
+    text-align: center;
+    display: block;
+}
+
+#nome_para_unidade
+{
+    border-radius: 10px;
+    margin-top: 20px;
+}
+input[type=submit]
+{
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    background: linear-gradient(to right, #25c481, #25b7c4);
+    margin-left: 50px;
+}
+
+.inserir_tipo_unidade
+{
+    margin-top: 5px;
+}
+
+.campo_obrigatorio
+{
+    display: flex;
+    color: red;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inserido_com_sucesso
+{
+    text-align:center;
+}
+
+.valor_para_valor_permitido
+{
+    color: rgba(15, 63, 77, 0.8);
+    padding-bottom: 30px;
+    padding-top: 20px;
+}
+
+a .campo_obrigatorio
+{
+    text-decoration: none;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+}
+
+.post-entry
+{
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.valores_permitidos_introducao
+{
+    color: rgba(15, 63, 77, 0.8);
+}
+
+article
+{
+    margin-top: -76px !important;
+}
+
+</style>
