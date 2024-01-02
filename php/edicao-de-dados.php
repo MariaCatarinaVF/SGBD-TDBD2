@@ -118,10 +118,12 @@ if(isset($_REQUEST['origem']) != "")
         {
             $idValorPermitido = $_GET['id'];
             $value = $_GET['tipo'];
-            $estado = $_GET['estado'];
+            $estado = $_GET['state'];
             $idSubitem = $_GET['idSubitem'];
+            
             echo '<div class="" >';//criar uma classe depois
             echo '<h4>Pretende desativar o item?</h4>';
+            echo '<form method="post" action="">';
             echo '<div class= "">';
             echo '<table>';
             echo '<tr>';
@@ -139,14 +141,147 @@ if(isset($_REQUEST['origem']) != "")
             echo '</table>';
             echo '</div>';
             echo '</div>';
+            echo '<input type="hidden" name="tipo" value="' . $value . '">';
+            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
+            echo '<input type="hidden" name="state" value="' . $estado . '">';
+            echo "<input type='hidden' name='estado' value='desativar_sucesso'>";
+            echo "<input type='submit' value='Submeter'>";
+            echo '</form>';
+            echo '<br>';
+            voltarAtras();
         }
+        else if($_REQUEST['estado'] == "desativar_sucesso")
+        {
+            $idValorPermitido = $_REQUEST['id'];
+
+            $query_para_desativar = 'UPDATE subitem_allowed_value SET state="inactive" 
+                                     WHERE id='.$idValorPermitido.'';
+            $conectar_query_para_desativar = mysqli_query($link,$query_para_desativar);
+
+            if ($conectar_query_para_desativar)
+            {
+                echo '<h4>Atualizações realizadas com sucesso</h4>';
+                echo '<a href="/sgbd/gestao-de-valores-permitidos">Continuar</a>';
+            }
+            else
+            {
+                echo '<p>Ocorreu algum erro ao desativar o valor permitido '.mysqli_error($conectar_query_para_desativar).'</p>';
+            }
+        }
+
+        if ($_REQUEST['estado'] == "ativar")
+        {
+            $idValorPermitido = $_GET['id'];
+            $value = $_GET['tipo'];
+            $estado = $_GET['state'];
+            $idSubitem = $_GET['idSubitem'];
+
+            echo '<div class="" >';//criar uma classe depois
+            echo '<h4>Pretende ativar o item?</h4>';
+            echo '<form method="post" action="">';
+            echo '<div class= "">';
+            echo '<table>';
+            echo '<tr>';
+            echo '<th>id</th>';
+            echo '<th>subitem_id</th>';
+            echo '<th>value</th>';
+            echo '<th>state</th>';
+            echo '</tr>';
+            echo '<tr>';
+            echo '<td>' . $idValorPermitido . '</td>';
+            echo '<td>' . $idSubitem . '</td>';
+            echo '<td>' . $value . '</td>';
+            echo '<td>' . $estado . '</td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '</div>';
+            echo '</div>';
+            echo '<input type="hidden" name="tipo" value="' . $value . '">';
+            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
+            echo '<input type="hidden" name="state" value="' . $estado . '">';
+            echo "<input type='hidden' name='estado' value='ativar_sucesso'>";
+            echo "<input type='submit' value='Submeter'>";
+            echo '</form>';
+            echo '<br>';
+            voltarAtras();
+        }
+        else if($_REQUEST['estado'] == "ativar_sucesso")
+        {
+            $idValorPermitido = $_REQUEST['id'];
+
+            $query_para_ativar = 'UPDATE subitem_allowed_value SET state="active" 
+                                     WHERE id='.$idValorPermitido.'';
+            $conectar_query_para_ativar = mysqli_query($link,$query_para_ativar);
+
+            if ($conectar_query_para_ativar)
+            {
+                echo '<h4>Atualizações realizadas com sucesso</h4>';
+                echo '<a href="/sgbd/gestao-de-valores-permitidos">Continuar</a>';
+            }
+            else
+            {
+                echo '<p>Ocorreu algum erro ao ativar o valor permitido '.mysqli_error($conectar_query_para_ativar).'</p>';
+            }
+        }
+
         else if ($_REQUEST['estado'] == "editar")
         {
             echo '<p>Estou na página edição de dados para editar o valor permitido</p>';
         }
         else if ($_REQUEST['estado'] == "apagar")
         {
-            echo '<p>Estou na página edição de dados para apagar o valor permitido</p>';
+            echo '<h3>Estamos prestes a apagar os dados abaixo da base de dados. Confirma que pretende apagar os mesmos?</h3>';
+            $idValorPermitido = $_GET['id'];
+            $value = $_GET['tipo'];
+            $estado = $_GET['state'];
+            $idSubitem = $_GET['idSubitem'];
+
+            echo '<div class="" >';//criar uma classe depois
+            echo '<form method="post" action="">';
+            echo '<div class= "">';
+            echo '<table>';
+            echo '<tr>';
+            echo '<th>id</th>';
+            echo '<th>subitem_id</th>';
+            echo '<th>value</th>';
+            echo '<th>state</th>';
+            echo '</tr>';
+            echo '<tr>';
+            echo '<td>' . $idValorPermitido . '</td>';
+            echo '<td>' . $idSubitem . '</td>';
+            echo '<td>' . $value . '</td>';
+            echo '<td>' . $estado . '</td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '</div>';
+            echo '</div>';
+            echo '<input type="hidden" name="tipo" value="' . $value . '">';
+            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
+            echo '<input type="hidden" name="state" value="' . $estado . '">';
+            echo "<input type='hidden' name='estado' value='apagar_valor'>";
+            echo "<input type='submit' value='Submeter'>";
+            echo '</form>';
+            echo '<br>';
+            voltarAtras();
+        }
+        else if($_REQUEST['estado'] == "apagar_valor")
+        {
+            $idValorPermitido = $_REQUEST['id'];
+            $query_para_eliminar_valor_permitido = 'DELETE FROM subitem_allowed_value WHERE id= ' .$idValorPermitido.'';
+            $conectar_query_para_eliminar_valor_permitido = mysqli_query($link,$query_para_eliminar_valor_permitido);
+
+            if($conectar_query_para_eliminar_valor_permitido)
+            {
+                echo '<h4>Eliminações realizadas com sucesso</h4>';
+                echo '<a href="/sgbd/gestao-de-valores-permitidos">Continuar</a>';
+            }
+            else
+            {
+                echo '<p>Ocorreu algum erro ao eliminar o valor permitido '.mysqli_error($conectar_query_para_eliminar_valor_permitido).'</p>';
+            }
         }
     }
     else
