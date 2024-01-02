@@ -118,16 +118,16 @@ else if(isset($_REQUEST['estado']) == "")
                         {
                             echo '<td>';
                             echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
-                            echo "<a href='/sgbd/edicao-de-dados?estado=desativar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&state=" .$estado. "&origem=gestao-de-valores-permitidos'>[desativar]</a>";
-                            echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&state=" .$estado. "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=desativar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[desativar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
                             echo '</td>';
                         }
                         else
                         {
                             echo '<td>';
                             echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
-                            echo "<a href='/sgbd/edicao-de-dados?estado=ativar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&state=" .$estado. "&origem=gestao-de-valores-permitidos'>[ativar]</a>";
-                            echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&state=" .$estado. "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=ativar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[ativar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
                             echo '</td>';
                         }
                         echo '</tr>';

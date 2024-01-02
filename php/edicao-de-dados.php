@@ -118,38 +118,46 @@ if(isset($_REQUEST['origem']) != "")
         {
             $idValorPermitido = $_GET['id'];
             $value = $_GET['tipo'];
-            $estado = $_GET['state'];
-            $idSubitem = $_GET['idSubitem'];
-            
-            echo '<div class="" >';//criar uma classe depois
-            echo '<h4>Pretende desativar o item?</h4>';
-            echo '<form method="post" action="">';
-            echo '<div class= "">';
-            echo '<table>';
-            echo '<tr>';
-            echo '<th>id</th>';
-            echo '<th>subitem_id</th>';
-            echo '<th>value</th>';
-            echo '<th>state</th>';
-            echo '</tr>';
-            echo '<tr>';
-            echo '<td>' . $idValorPermitido . '</td>';
-            echo '<td>' . $idSubitem . '</td>';
-            echo '<td>' . $value . '</td>';
-            echo '<td>' . $estado . '</td>';
-            echo '</tr>';
-            echo '</table>';
-            echo '</div>';
-            echo '</div>';
-            echo '<input type="hidden" name="tipo" value="' . $value . '">';
-            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
-            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
-            echo '<input type="hidden" name="state" value="' . $estado . '">';
-            echo "<input type='hidden' name='estado' value='desativar_sucesso'>";
-            echo "<input type='submit' value='Submeter'>";
-            echo '</form>';
-            echo '<br>';
-            voltarAtras();
+
+            $query_para_obter_valor_permitido = 'SELECT subitem_allowed_value.subitem_id, subitem_allowed_value.state, subitem_allowed_value.value
+                                          FROM subitem_allowed_value,subitem
+                                          WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_allowed_value.id='.$idValorPermitido.'';
+            $conectar_query_para_obter_valor_permitido = mysqli_query($link,$query_para_obter_valor_permitido);
+            $devolve_numero_linhas_valor_permitido = mysqli_num_rows($conectar_query_para_obter_valor_permitido);
+
+                if ($imprime_subitens = $conectar_query_para_obter_valor_permitido->fetch_assoc())
+                {
+                    $idSubitem = $imprime_subitens['subitem_id'];
+                    $estado = $imprime_subitens['state'];
+
+                    echo '<div class="" >';//criar uma classe depois
+                    echo '<h4>Pretende desativar o item?</h4>';
+                    echo '<form method="post" action="">';
+                    echo '<div class= "">';
+                    echo '<table>';
+                    echo '<tr>';
+                    echo '<th>id</th>';
+                    echo '<th>subitem_id</th>';
+                    echo '<th>value</th>';
+                    echo '<th>state</th>';
+                    echo '</tr>';
+                    echo '<tr>';
+                    echo '<td>' . $idValorPermitido . '</td>';
+                    echo '<td>' . $idSubitem . '</td>';
+                    echo '<td>' . $value . '</td>';
+                    echo '<td>' . $estado . '</td>';
+                    echo '</tr>';
+                    echo '</table>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<input type="hidden" name="tipo" value="' . $value . '">';
+                    echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+                    echo "<input type='hidden' name='estado' value='desativar_sucesso'>";
+                    echo "<input type='submit' value='Submeter'>";
+                    echo '</form>';
+                    echo '<br>';
+                    voltarAtras();
+                }
         }
         else if($_REQUEST['estado'] == "desativar_sucesso")
         {
@@ -174,38 +182,46 @@ if(isset($_REQUEST['origem']) != "")
         {
             $idValorPermitido = $_GET['id'];
             $value = $_GET['tipo'];
-            $estado = $_GET['state'];
-            $idSubitem = $_GET['idSubitem'];
 
-            echo '<div class="" >';//criar uma classe depois
-            echo '<h4>Pretende ativar o item?</h4>';
-            echo '<form method="post" action="">';
-            echo '<div class= "">';
-            echo '<table>';
-            echo '<tr>';
-            echo '<th>id</th>';
-            echo '<th>subitem_id</th>';
-            echo '<th>value</th>';
-            echo '<th>state</th>';
-            echo '</tr>';
-            echo '<tr>';
-            echo '<td>' . $idValorPermitido . '</td>';
-            echo '<td>' . $idSubitem . '</td>';
-            echo '<td>' . $value . '</td>';
-            echo '<td>' . $estado . '</td>';
-            echo '</tr>';
-            echo '</table>';
-            echo '</div>';
-            echo '</div>';
-            echo '<input type="hidden" name="tipo" value="' . $value . '">';
-            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
-            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
-            echo '<input type="hidden" name="state" value="' . $estado . '">';
-            echo "<input type='hidden' name='estado' value='ativar_sucesso'>";
-            echo "<input type='submit' value='Submeter'>";
-            echo '</form>';
-            echo '<br>';
-            voltarAtras();
+            $query_para_obter_valor_permitido = 'SELECT subitem_allowed_value.subitem_id, subitem_allowed_value.state, subitem_allowed_value.value
+                                          FROM subitem_allowed_value,subitem
+                                          WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_allowed_value.id='.$idValorPermitido.'';
+            $conectar_query_para_obter_valor_permitido = mysqli_query($link,$query_para_obter_valor_permitido);
+            $devolve_numero_linhas_valor_permitido = mysqli_num_rows($conectar_query_para_obter_valor_permitido);
+
+            if ($imprime_subitens = $conectar_query_para_obter_valor_permitido->fetch_assoc())
+            {
+                $idSubitem = $imprime_subitens['subitem_id'];
+                $estado = $imprime_subitens['state'];
+
+                echo '<div class="" >';//criar uma classe depois
+                echo '<h4>Pretende ativar o item?</h4>';
+                echo '<form method="post" action="">';
+                echo '<div class= "">';
+                echo '<table>';
+                echo '<tr>';
+                echo '<th>id</th>';
+                echo '<th>subitem_id</th>';
+                echo '<th>value</th>';
+                echo '<th>state</th>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td>' . $idValorPermitido . '</td>';
+                echo '<td>' . $idSubitem . '</td>';
+                echo '<td>' . $value . '</td>';
+                echo '<td>' . $estado . '</td>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+                echo '<input type="hidden" name="tipo" value="' . $value . '">';
+                echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+                echo "<input type='hidden' name='estado' value='ativar_sucesso'>";
+                echo "<input type='submit' value='Submeter'>";
+                echo '</form>';
+                echo '<br>';
+                voltarAtras();
+            }
         }
         else if($_REQUEST['estado'] == "ativar_sucesso")
         {
@@ -228,44 +244,97 @@ if(isset($_REQUEST['origem']) != "")
 
         else if ($_REQUEST['estado'] == "editar")
         {
-            echo '<p>Estou na página edição de dados para editar o valor permitido</p>';
+            $idValorPermitido = $_GET['id'];
+            $value = $_GET['tipo'];
+
+            $query_para_obter_valor_permitido = 'SELECT subitem_allowed_value.subitem_id, subitem_allowed_value.state, subitem_allowed_value.value
+                                          FROM subitem_allowed_value,subitem
+                                          WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_allowed_value.id='.$idValorPermitido.'';
+            $conectar_query_para_obter_valor_permitido = mysqli_query($link,$query_para_obter_valor_permitido);
+            $devolve_numero_linhas_valor_permitido = mysqli_num_rows($conectar_query_para_obter_valor_permitido);
+
+            if ($imprime_subitens = $conectar_query_para_obter_valor_permitido->fetch_assoc())
+            {
+                $idSubitem = $imprime_subitens['subitem_id'];
+                $estado = $imprime_subitens['state'];
+
+                $query_obter_subitens = 'SELECT id FROM subitem WHERE subitem.value_type="enum';
+                $conectar_query_para_obter_subitens = mysqli_query($link,$query_obter_subitens);
+
+                echo '<div class="" >';//criar uma classe depois
+                echo '<form method="post" action="">';
+                echo '<div class= "">';
+                echo '<table>';
+                echo '<tr>';
+                echo '<th>id</th>';
+                echo '<th>subitem_id</th>';
+                echo '<th>value</th>';
+                echo '<th>state</th>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td>' . $idValorPermitido . '</td>';
+                echo '<td>' . $idSubitem . '</td>';
+                echo '<td> <input type="text" name="tipo" value="' . $value . '"> </td>';
+                echo '<td>' . $estado . '</td>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+                echo '<input type="hidden" name="tipo" value="' . $value . '">';
+                echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+                echo "<input type='hidden' name='estado' value='editar_valor'>";
+                echo "<input type='submit' value='Submeter'>";
+                echo '</form>';
+                echo '<br>';
+                voltarAtras();
+            }
         }
         else if ($_REQUEST['estado'] == "apagar")
         {
             echo '<h3>Estamos prestes a apagar os dados abaixo da base de dados. Confirma que pretende apagar os mesmos?</h3>';
             $idValorPermitido = $_GET['id'];
             $value = $_GET['tipo'];
-            $estado = $_GET['state'];
-            $idSubitem = $_GET['idSubitem'];
 
-            echo '<div class="" >';//criar uma classe depois
-            echo '<form method="post" action="">';
-            echo '<div class= "">';
-            echo '<table>';
-            echo '<tr>';
-            echo '<th>id</th>';
-            echo '<th>subitem_id</th>';
-            echo '<th>value</th>';
-            echo '<th>state</th>';
-            echo '</tr>';
-            echo '<tr>';
-            echo '<td>' . $idValorPermitido . '</td>';
-            echo '<td>' . $idSubitem . '</td>';
-            echo '<td>' . $value . '</td>';
-            echo '<td>' . $estado . '</td>';
-            echo '</tr>';
-            echo '</table>';
-            echo '</div>';
-            echo '</div>';
-            echo '<input type="hidden" name="tipo" value="' . $value . '">';
-            echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
-            echo '<input type="hidden" name="idSubitem" value="' . $idSubitem . '">';
-            echo '<input type="hidden" name="state" value="' . $estado . '">';
-            echo "<input type='hidden' name='estado' value='apagar_valor'>";
-            echo "<input type='submit' value='Submeter'>";
-            echo '</form>';
-            echo '<br>';
-            voltarAtras();
+            $query_para_obter_valor_permitido = 'SELECT subitem_allowed_value.subitem_id, subitem_allowed_value.state, subitem_allowed_value.value
+                                          FROM subitem_allowed_value,subitem
+                                          WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_allowed_value.id='.$idValorPermitido.'';
+            $conectar_query_para_obter_valor_permitido = mysqli_query($link,$query_para_obter_valor_permitido);
+            $devolve_numero_linhas_valor_permitido = mysqli_num_rows($conectar_query_para_obter_valor_permitido);
+
+
+
+            if ($imprime_subitens = $conectar_query_para_obter_valor_permitido->fetch_assoc())
+            {
+                $idSubitem = $imprime_subitens['subitem_id'];
+                $estado = $imprime_subitens['state'];
+
+                echo '<div class="" >';//criar uma classe depois
+                echo '<form method="post" action="">';
+                echo '<div class= "">';
+                echo '<table>';
+                echo '<tr>';
+                echo '<th>id</th>';
+                echo '<th>subitem_id</th>';
+                echo '<th>value</th>';
+                echo '<th>state</th>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td>' . $idValorPermitido . '</td>';
+                echo '<td>' . $idSubitem . '</td>';
+                echo '<td>' . $value . '</td>';
+                echo '<td>' . $estado . '</td>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</div>';
+                echo '</div>';
+                echo '<input type="hidden" name="tipo" value="' . $value . '">';
+                echo '<input type="hidden" name="id" value="' . $idValorPermitido . '">';
+                echo "<input type='hidden' name='estado' value='apagar_valor'>";
+                echo "<input type='submit' value='Submeter'>";
+                echo '</form>';
+                echo '<br>';
+                voltarAtras();
+            }
         }
         else if($_REQUEST['estado'] == "apagar_valor")
         {
