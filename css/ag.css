@@ -53,12 +53,31 @@ h3
 
 .formulario
 {
-    max-width: 400px;
+    /*max-width: 450px;
     padding: 25px;
     margin: 10px auto;
     background: #F7F7F7;
     margin-top:45px;
+    border-radius: 20px;*/
+    display: flex;
+    max-width: 450px;
+    padding: 30px ;
+    margin: 10px auto;
+    background: #F7F7F7;
+    margin-top: 45px;
     border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario input[type="submit"]
+{
+    margin-left:0 !important;
+}
+
+.formulario h3
+{
+    padding-top: 0 !important;
 }
 
 .inseridoComSucesso
@@ -133,6 +152,49 @@ a .campo_obrigatorio
 article
 {
     margin-top: -76px !important;
+}
+
+.voltar_atras_meio
+{
+    display: flex;
+    justify-content: center;
+}
+
+.form_sucesso
+{
+    text-align: center;
+    max-width: 36%;
+    padding: 25px;
+    margin: 50px auto;
+    background: #F7F7F7;
+    border-radius: 20px;
+
+}
+
+.vermelho
+{
+    color:red;
+}
+
+.formulario_registo
+{
+    max-width: 450px;
+    padding: 30px;
+    margin: 10px auto;
+    background: #F7F7F7;
+    margin-top: 45px;
+    border-radius: 20px;
+}
+
+.formulario_registo label
+{
+    display: inline !important;
+}
+
+.formulario_registo input[type="submit"]
+{
+    margin: 10px auto;
+    display: flex;
 }
 
 </style>

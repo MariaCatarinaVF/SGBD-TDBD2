@@ -53,7 +53,7 @@ else if(isset($_REQUEST['estado']) == "")
             $query_para_obter_id_do_subitemAllowedValue = "SELECT subitem_allowed_value.id
                                                                                 FROM subitem_allowed_value,subitem
                                                                                 WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_id=$id_subitem 
-                                                                                GROUP BY subitem_allowed_value.value";//ver o subitem.id
+                                                                                GROUP BY subitem_allowed_value.id";//ver o subitem.id
             $conexao_query_para_obter_subitemAllowedValues = mysqli_query($link, $query_para_obter_id_do_subitemAllowedValue);
             $devolve_numero_linhas_query_subitemAllowedValue = mysqli_num_rows($conexao_query_para_obter_subitemAllowedValues);
 
@@ -85,7 +85,7 @@ else if(isset($_REQUEST['estado']) == "")
                 $query_para_obter_nome_estado_do_subitemAllowedValue = "SELECT subitem_allowed_value.id,subitem_allowed_value.value,subitem_allowed_value.state 
                                                                                 FROM subitem_allowed_value,subitem
                                                                                 WHERE subitem_allowed_value.subitem_id=subitem.id AND subitem_id=$idSubitem 
-                                                                                GROUP BY subitem_allowed_value.value";
+                                                                                GROUP BY subitem_allowed_value.id";
                 $conexao_query_para_obter_nome_estado_do_subitemAllowedValue = mysqli_query($link, $query_para_obter_nome_estado_do_subitemAllowedValue);
                 $devolve_numero_linhas_query_subitemAllowedValue = mysqli_num_rows($conexao_query_para_obter_nome_estado_do_subitemAllowedValue);
 
@@ -117,7 +117,7 @@ else if(isset($_REQUEST['estado']) == "")
                         if($estado == 'active')
                         {
                             echo '<td>';
-                            echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
                             echo "<a href='/sgbd/edicao-de-dados?estado=desativar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[desativar]</a>";
                             echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
                             echo '</td>';
@@ -125,7 +125,7 @@ else if(isset($_REQUEST['estado']) == "")
                         else
                         {
                             echo '<td>';
-                            echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&idSubitem=" . $idSubitem . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
+                            echo "<a href='/sgbd/edicao-de-dados?estado=editar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[editar]</a>";
                             echo "<a href='/sgbd/edicao-de-dados?estado=ativar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[ativar]</a>";
                             echo "<a href='/sgbd/edicao-de-dados?estado=apagar&tipo=" . $value . "&id=" . $idValorPermitido . "&origem=gestao-de-valores-permitidos'>[apagar]</a>";
                             echo '</td>';
@@ -157,10 +157,11 @@ else if($_REQUEST['estado'] == 'introducao')
     echo'<br><br>';
     echo'<input type="submit" name="submit" value="Inserir valor permitido"/>';
     echo'</form>';
-    echo '</div>';
     echo'<br>';
-    voltarAtras();
-
+    echo '<div class=voltar_atras_meio>';
+        voltarAtras();
+    echo'</div>';
+    echo '</div>';
 }
 else if($_REQUEST['estado'] == 'inserir')
 {
@@ -171,13 +172,21 @@ else if($_REQUEST['estado'] == 'inserir')
 
     if(empty($nome_para_valor_permitido_novo))
     {
+        echo'<div class="formulario campo_obrigatorio">';
         echo'<p class="campo_obrigatorio">Campo obrigatório!</p>';
-        voltarAtras();
+        echo '<div class=voltar_atras_meio>';
+            voltarAtras();
+        echo'</div>';
+        echo'</div>';
     }
-    else if((!preg_match("/^[a-zA-Z-Ç-ç]+$/",$nome_para_valor_permitido_novo)))
+    else if((!preg_match("/^[a-zA-Z-Ç-ç\/á-úÁ-Úâ-ûÂ-Ûã-õÃ-Õä-üÄ-Ü]+$/", $nome_para_valor_permitido_novo)))
     {
-        echo'<p class="campo_obrigatorio">Este campo deve incluir apenas letras!</p>';
-        voltarAtras();
+        echo'<div class="formulario campo_obrigatorio">';
+        echo'<p class="campo_obrigatorio">Este campo deve incluir apenas letras, acentos e/ou "/"!</p>';
+        echo '<div class=voltar_atras_meio>';
+            voltarAtras();
+        echo'</div>';
+        echo '</div>';
     }
     else
     {
@@ -188,13 +197,19 @@ else if($_REQUEST['estado'] == 'inserir')
         if($conectar_inserir_valor_permitido_novo)
         {
             $gestao_valores_permitidos = paginaAtual();
+            echo'<div class="form_sucesso">';
             echo'<p>Inseriu os dados de novo valor permitido com sucesso.</p>';
             echo'<p>Clique em <a href="'.$gestao_valores_permitidos.'">Continuar</a> para avançar</p>';
+            echo '</div>';
         }
         else
         {
+            echo'<div class="formulario">';
             echo'<p>Ocorreu algum erro de inserção do nome para o valor permitido</p>';
+            echo '<div class=voltar_atras_meio>';
             voltarAtras();
+            echo'</div>';
+            echo '</div>';
         }
     }
 }

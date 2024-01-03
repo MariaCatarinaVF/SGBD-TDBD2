@@ -41,7 +41,7 @@ else if(isset($_REQUEST['estado']) == "")
                                                         FROM subitem_unit_type
                                                         INNER JOIN subitem ON subitem.unit_type_id ='.$id_unidade.'
                                                         INNER JOIN item ON subitem.item_id = item.id
-                                                        GROUP BY nome_subitem';
+                                                        GROUP BY subitem.id';
             $conexao_query_BD_acima = mysqli_query($link,$query_para_obter_SubitemNome_ItemNome);
             $devolve_numero_linhas_acima = mysqli_num_rows($conexao_query_BD_acima);
 
@@ -98,10 +98,10 @@ else if($_REQUEST['estado'] == "inserir")
         voltarAtras();
         echo'</div>';
     }
-    else if((!preg_match("/^[a-zA-Z-Ç-ç]+$/",$nome_para_unidade)))
+    else if((!preg_match("/^[a-zA-Z-Ç-ç\/á-úÁ-Úâ-ûÂ-Ûã-õÃ-Õä-üÄ-Ü]+$/", $nome_para_unidade)))
     {
         echo'<div class="formulario campo_obrigatorio">';
-        echo'<p class="campo_obrigatorio">Este campo deve incluir apenas letras!</p>';
+        echo'<p class="campo_obrigatorio">Este campo deve incluir apenas letras, acentos e/ou "/"!</p>';
         echo'<div class="voltar_atras">'.voltarAtras().'</div>';
         echo'</div>';
     }
